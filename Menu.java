@@ -2,11 +2,14 @@ import java.util.Scanner;
 
 public class Menu {
     public void start() {
+
+        Validator validator = new Validator();
+
         String cardNumber = getCardNumber();
 
-        Card card = createCard(cardNumber);
+        Card card = createCard(cardNumber, validator);
 
-        if (!isLengthValid(card)) {
+        if (!isLengthValid(card, validator)) {
             return;
         }
 
@@ -14,7 +17,7 @@ public class Menu {
             return;
         }
 
-        isLuhnValid(card);
+        isLuhnValid(card, validator);
     }
 
     private String getCardNumber() {
@@ -27,14 +30,12 @@ public class Menu {
         return cardNumber;
     }
 
-    private Card createCard(String cardNumber) {
-        Validator validator = new Validator();
+    private Card createCard(String cardNumber, Validator validator) {
 
         return new Card(cardNumber, validator.getTypeOfCard(cardNumber));
     }
 
-    private boolean isLengthValid(Card card) {
-        Validator validator = new Validator();
+    private boolean isLengthValid(Card card, Validator validator) {
 
         if (!validator.isLengthValid(card.number)) {
             System.out.println("Неверное количество цифр!");
@@ -54,8 +55,8 @@ public class Menu {
         }
     }
 
-    private boolean isLuhnValid(Card card) {
-        Validator validator = new Validator();
+    private boolean isLuhnValid(Card card, Validator validator) {
+
 
         if (validator.isLuhnValid(card.number)) {
             System.out.println("Карта валидна");
