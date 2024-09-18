@@ -11,10 +11,3 @@ public class Card {
 
 }
 
-enum Type {
-
-    VISA,
-    MASTERCARD,
-    AMEX,
-    INVALID
-}
